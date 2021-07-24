@@ -2,13 +2,17 @@
 name = "easy-equities-client"
 version = "0.1.0"
 description = "Unofficial Easy Equities and Satrix Python Client"
+
 authors = ["Delena Malan <delena.malan@gmail.com>"]
 maintainers = ["Delena Malan <delena.malan@gmail.com>"]
-license = MIT
-readme = README.md
-homepage = https://github.com/delenamalan/easy-equities-client
-repository = https://github.com/delenamalan/easy-equities-client
-keywords = easyequities satrix money
+
+license = "MIT"
+readme = "README.md"
+homepage = "https://github.com/delenamalan/easy-equities-client"
+repository = "https://github.com/delenamalan/easy-equities-client"
+
+keywords = ["easyequities", "satrix", "money"]
+
 classifiers=[
     'Development Status :: 3 - Alpha',
     'Intended Audience :: Developers',
@@ -16,6 +20,7 @@ classifiers=[
     'Programming Language :: Python :: 3',
     'Programming Language :: Python :: 3.8',
 ]
+
 packages = [
     { include = "easy_equities_client" }
 ]
