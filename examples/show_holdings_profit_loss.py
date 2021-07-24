@@ -1,12 +1,13 @@
 """
 Calculate the total profit/loss for each of your accounts.
 
+Usage: python show_holdings_profit_loss.py <platform:satrix/easyequities> <username> <password>
+
 Requires the colorama package.
 """
-from sys import argv
+import sys
 
 import colorama
-from colorama import Fore
 
 from easy_equities_client.clients import (
     EasyEquitiesClient,
@@ -16,13 +17,14 @@ from easy_equities_client.clients import (
 
 colorama.init(autoreset=True)
 
-if len(argv) != 4:
+if len(sys.argv) != 4:
     print(
         "Usage:\npython show_holdings_profit_loss.py <platform:satrix/easyequities> <username> <password>"
     )
-platform = argv[1]
-username = argv[2]
-password = argv[3]
+    sys.exit()
+platform = sys.argv[1]
+username = sys.argv[2]
+password = sys.argv[3]
 
 client: PlatformClient = (
     EasyEquitiesClient() if platform == 'easyequities' else SatrixClient()
@@ -54,7 +56,7 @@ for account in accounts:
         )
         profit_loss_perc = (profit_loss / purchase_value) * 100
         symbol = '+' if profit_loss >= 0 else '-'
-        colour = Fore.GREEN if profit_loss >= 0 else Fore.RED
+        colour = colorama.Fore.GREEN if profit_loss >= 0 else colorama.Fore.RED
 
         str_profit_loss = (
             f"{symbol}{currency}{abs(profit_loss):.2f} ({profit_loss_perc:.2f}%)"

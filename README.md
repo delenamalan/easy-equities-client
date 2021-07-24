@@ -135,6 +135,16 @@ transactions = client.accounts.transactions(accounts[0].id)
 ]
 ```
 
+## Example uses
+
+### Show holdings total profits/losses
+
+Run a script to show your holdings and their total profits/losses, e.g. [show_holdings_profit_loss.py](./examples/show_holdings_profit_loss.py).
+
+![show_holdings_profit_loss.py example output](./examples/show_holdings_profit_loss_example.png)
+
+
+
 ## Contributing
 
 See [Contributing](./CONTRIBUTING.md)
