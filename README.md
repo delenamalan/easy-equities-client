@@ -1,6 +1,6 @@
 # Easy Equities and Satrix Python Client
 
-Unofficial Python client for [Easy Equities](easyequities.io/) and [Satrix](satrix.co.za/).
+Unofficial Python client for [Easy Equities](easyequities.io/) and [Satrix](satrix.co.za/). Intended for personal use.
 
 
 ## Installation
@@ -137,4 +137,4 @@ transactions = client.accounts.transactions(accounts[0].id)
 
 ## Contributing
 
-See [Contributing](./contributing.md)
+See [Contributing](./CONTRIBUTING.md)
