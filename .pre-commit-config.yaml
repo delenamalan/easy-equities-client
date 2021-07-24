@@ -1,0 +1,23 @@
+repos:
+-   repo: https://github.com/asottile/seed-isort-config
+    rev: v1.9.4
+    hooks:
+    - id: seed-isort-config
+-   repo: https://github.com/PyCQA/isort
+    rev: 5.5.4
+    hooks:
+    - id: isort
+-   repo: https://github.com/psf/black
+    rev: 20.8b1
+    hooks:
+    - id: black
+      language_version: python3.8
+- repo: https://gitlab.com/pycqa/flake8
+  rev: 3.8.4
+  hooks:
+  - id: flake8
+    additional_dependencies: [flake8-bugbear]
+- repo: https://github.com/pre-commit/mirrors-mypy
+  rev: '6fd7e2a39e5a8f7c7b14ddcc5290ef69b0c446db'
+  hooks:
+  - id: mypy

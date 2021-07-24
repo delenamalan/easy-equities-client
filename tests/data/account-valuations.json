@@ -1,0 +1,159 @@
+{
+    "NetInterestOnCashItems": [
+        {
+            "Label": "Total Interest on Free Cash",
+            "Value": "R1.00"
+        },
+        {
+            "Label": "Interest Income",
+            "Value": "R100.00"
+        },
+        {
+            "Label": "Cash Management Fee",
+            "Value": "-R10.00"
+        },
+        {
+            "Label": "VAT On Cash Management Fee",
+            "Value": "-R5.00"
+        }
+    ],
+    "AccrualSummaryItems": [
+        {
+            "Label": "Net Accrual",
+            "Value": "R0.00"
+        },
+        {
+            "Label": "Interest",
+            "Value": "R0.00"
+        },
+        {
+            "Label": "Cash Management Fee",
+            "Value": "R0.00"
+        },
+        {
+            "Label": "VAT",
+            "Value": "R0.00"
+        }
+    ],
+    "TopSummary": {
+        "AccountValue": 5000.50,
+        "AccountCurrency": "ZAR",
+        "AccountNumber": "EE170001-503210",
+        "AccountName": "TFSA",
+        "PeriodMovements": [
+            {
+                "ValueMoveLabel": "Profit & Loss Value",
+                "ValueMove": "R200.00",
+                "PercentageMoveLabel": "Profit & Loss",
+                "PercentageMove": "4.00%",
+                "PeriodMoveHeader": "Movement on Current Holdings:"
+            }
+        ]
+    },
+    "InvestmentTypesAndManagers": {
+        "InvestmentTypes": [
+            {
+                "Key": "ETFs",
+                "Value": "R16 180.49",
+                "Percentage": 100.00
+            },
+            {
+                "Key": "Funds to Invest",
+                "Value": "R0.00",
+                "Percentage": 0.00
+            },
+            {
+                "Key": "Income",
+                "Value": "R0.00",
+                "Percentage": 0.0
+            },
+            {
+                "Key": "Expense",
+                "Value": "R0.00",
+                "Percentage": 0.00
+            }
+        ],
+        "Managers": [
+            {
+                "Key": "Self Managed",
+                "Value": "R16 180.49",
+                "Percentage": 100.0
+            }
+        ]
+    },
+    "InvestmentSummaryItems": [
+        {
+            "Label": "Total Profit / Loss on Current Holdings",
+            "Value": "R200.00 / 4.00%",
+            "IsPositive": true
+        },
+        {
+            "Label": "Last Valuation",
+            "Value": "R16 180.49",
+            "IsPositive": true
+        },
+        {
+            "Label": "Purchase Value",
+            "Value": "R16 380.49",
+            "IsPositive": true
+        }
+    ],
+    "CostsSummaryItems": [
+        {
+            "Label": "Total Brokerage and Statutory Costs",
+            "Value": "R20.80"
+        },
+        {
+            "Label": "Statutory Costs",
+            "Value": "R5.80"
+        },
+        {
+            "Label": "Brokerage Costs",
+            "Value": "R12.54"
+        },
+        {
+            "Label": "Total Bundle Costs",
+            "Value": "R0.00"
+        },
+        {
+            "Label": "Statutory Costs",
+            "Value": "R0.00"
+        },
+        {
+            "Label": "Brokerage Costs",
+            "Value": "R0.00"
+        },
+        {
+            "Label": "Management Fee",
+            "Value": "R0.00"
+        },
+        {
+            "Label": "VAT",
+            "Value": "R0.00"
+        },
+        {
+            "Label": "VAT",
+            "Value": "R2.46"
+        }
+    ],
+    "FundSummaryItems": [
+        {
+            "Label": "Your Funds to Invest",
+            "Value": "R0.02"
+        },
+        {
+            "Label": "Withdrawable Funds",
+            "Value": "R0.02"
+        },
+        {
+            "Label": "Unsettled Cash",
+            "Value": "R0.00"
+        },
+        {
+            "Label": "Locked Funds",
+            "Value": "R0.00"
+        }
+    ],
+    "AccrualIncomeSummaryItems": null,
+    "AccrualExpenseSummaryItems": null
+}

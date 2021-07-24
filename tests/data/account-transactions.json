@@ -1,0 +1,92 @@
+[
+    {
+        "TransactionId": 0,
+        "DebitCredit": 20.02,
+        "Comment": "Account Balance Carried Forward",
+        "TransactionDate": "2020-11-16T23: 59: 00",
+        "LogId": 1,
+        "ActionId": 0,
+        "Action": "Account Balance Carried Forward",
+        "ContractCode": ""
+    },
+    {
+        "TransactionId": 0,
+        "DebitCredit": 1.0,
+        "Comment": "Interest",
+        "TransactionDate": "2020-11-05T21: 38: 33",
+        "LogId": 2,
+        "ActionId": 11,
+        "Action": "Interest on Cash",
+        "ContractCode": null
+    },
+    {
+        "TransactionId": 0,
+        "DebitCredit": -5.0,
+        "Comment": "Cash Management Fee",
+        "TransactionDate": "2020-11-05T21: 38: 33",
+        "LogId": 3,
+        "ActionId": 110,
+        "Action": "Cash management fee",
+        "ContractCode": null
+    },
+    {
+        "TransactionId": 0,
+        "DebitCredit": 2.0,
+        "Comment": "VAT on Cash Management Fee",
+        "TransactionDate": "2020-11-05T21: 38: 33",
+        "LogId": 4,
+        "ActionId": 115,
+        "Action": "Vat on Cash Management Fees",
+        "ContractCode": null
+    },
+    {
+        "TransactionId": 13512294,
+        "DebitCredit": 1000.50,
+        "Comment": "Bought SYGNIA ITRIX EUROSTOXX50 2.5569 @ 6,058.00",
+        "TransactionDate": "2020-06-15T08:43:08",
+        "LogId": 5,
+        "ActionId": 2,
+        "Action": "Margin Movement",
+        "ContractCode": "TFSA.SYGEU"
+    },
+    {
+        "TransactionId": 13512294,
+        "DebitCredit": -3.11,
+        "Comment": "Broker Commission SYGNIA ITRIX EUROSTOXX50 @ 0.25%",
+        "TransactionDate": "2020-06-15T08:43:08",
+        "LogId": 6,
+        "ActionId": 9,
+        "Action": "Market Makers Profit Margin",
+        "ContractCode": "TFSA.SYGEU"
+    },
+    {
+        "TransactionId": 13512294,
+        "DebitCredit": -0.93,
+        "Comment": "Settlement and administration",
+        "TransactionDate": "2020-06-15T08:43:08",
+        "LogId": 7,
+        "ActionId": 66,
+        "Action": "Settlement and administration",
+        "ContractCode": "TFSA.SYGEU"
+    },
+    {
+        "TransactionId": 13512294,
+        "DebitCredit": -0.01,
+        "Comment": "Investor protection levy (IPL) and administration",
+        "TransactionDate": "2020-06-15T08:43:08",
+        "LogId": 8,
+        "ActionId": 67,
+        "Action": "Investor Protection Levy (ipl) and administration",
+        "ContractCode": "TFSA.SYGEU"
+    },
+    {
+        "TransactionId": 13512294,
+        "DebitCredit": -0.61,
+        "Comment": "Value Added Tax on costs (VAT)",
+        "TransactionDate": "2020-06-15T08:43:08",
+        "LogId": 9,
+        "ActionId": 68,
+        "Action": "Value Added Tax",
+        "ContractCode": "TFSA.SYGEU"
+    }
+]
