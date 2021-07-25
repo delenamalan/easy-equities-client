@@ -61,3 +61,9 @@ def valuations():
 def account_transactions():
     with open('./tests/data/account-transactions.json', 'r') as f:
         return json.loads(f.read())
+
+
+@pytest.fixture
+def historical_prices():
+    with open('./tests/data/historical-prices.json', 'r') as f:
+        return json.loads(f.read())

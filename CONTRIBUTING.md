@@ -24,7 +24,7 @@ pytest
 Running the tests with code coverage:
 
 ```
-pytest --cov
+pytest --cov=easy_equities_client tests/
 ```
 
 ## Linting

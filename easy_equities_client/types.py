@@ -1,3 +1,5 @@
+from typing import Optional
+
 from requests import Session
 
 
@@ -9,5 +11,8 @@ class Client:
         else:
             self.session = session
 
-    def _url(self, path: str):
-        return f"{self.base_url}{path}"
+    def _url(self, path: str, query: Optional[str] = None) -> str:
+        url = f"{self.base_url}{path}"
+        if query:
+            return f"{url}?{query}"
+        return url

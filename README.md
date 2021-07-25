@@ -49,20 +49,6 @@ holdings = client.accounts.holdings(accounts[0].id)
 valuations = client.accounts.valuations(accounts[0].id)
 """
 {
-    "NetInterestOnCashItems": [
-        {
-            "Label": "Total Interest on Free Cash",
-            "Value": "R10.55"
-        },
-        ...
-    ],
-    "AccrualSummaryItems": [
-        {
-            "Label": "Net Accrual",
-            "Value": "R2.00"
-        },
-        ...
-    ],
     "TopSummary": {
         "AccountValue": 300000.50,
         "AccountCurrency": "ZAR",
@@ -78,31 +64,20 @@ valuations = client.accounts.valuations(accounts[0].id)
             }
         ]
     },
-    "InvestmentTypesAndManagers": {
-        "InvestmentTypes": [
-            {
-                "Key": "ETFs",
-                "Value": "R25 000.90",
-                "Percentage": 85.00
-            },
-            ...
-        ]
-    },
-    "InvestmentSummaryItems": [
+    "NetInterestOnCashItems": [
         {
-            "Label": "Total Profit / Loss on Current Holdings",
-            "Value": "R4 000.50 / 15.00%",
-            "IsPositive": true
+            "Label": "Total Interest on Free Cash",
+            "Value": "R10.55"
         },
         ...
-    ]
-    "CostsSummaryItems": [
+    ],
+    "AccrualSummaryItems": [
         {
-            "Label": "Total Brokerage and Statutory Costs",
-            "Value": "R300.00"
+            "Label": "Net Accrual",
+            "Value": "R2.00"
         },
         ...
-    ]
+    ],
     ...
 }
 """
@@ -133,9 +108,32 @@ transactions = client.accounts.transactions(accounts[0].id)
     },
     ...
 ]
+"""
+
+# Get historical data for an equity/instrument
+from easy_equities_client.instruments.types import Period
+historical_prices = client.instruments.historical_prices('EQU.ZA.SYGJP', Period.ONE_MONTH)
+"""
+{
+    "chartData": {
+        "Dataset": [
+            41.97,
+            42.37,
+            ...
+        ],
+        "Labels": [
+            "25 Jun 21",
+            "28 Jun 21",
+            ...
+        ],
+        "TradingCurrencySymbol": "R",
+        ...
+    }
+}
+"""
 ```
 
-## Example uses
+## Example Use Cases
 
 ### Show holdings total profits/losses
 
