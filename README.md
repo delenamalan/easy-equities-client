@@ -150,7 +150,8 @@ historical_prices = client.instruments.historical_prices('EQU.ZA.SYGJP', Period.
 
 ### Show holdings total profits/losses
 
-Run a script to show your holdings and their total profits/losses, e.g. [show_holdings_profit_loss.py](./examples/show_holdings_profit_loss.py).
+Run a script to show your holdings and their total profits/losses, e.g.  
+[show_holdings_profit_loss.py](https://github.com/delenamalan/easy-equities-client/blob/master/examples/show_holdings_profit_loss.py).
 
 ![show_holdings_profit_loss.py example output](https://raw.githubusercontent.com/delenamalan/easy-equities-client/master/examples/show_holdings_profit_loss_example.png)
 
