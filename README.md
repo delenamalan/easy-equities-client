@@ -1,6 +1,7 @@
 # Easy Equities and Satrix Python Client
 
-Unofficial Python client for [Easy Equities](easyequities.io/) and [Satrix](satrix.co.za/). Intended for personal use.
+Unofficial Python client for [Easy Equities](easyequities.io/) and 
+[Satrix](satrix.co.za/). **Intended for personal use.**
 
 
 ## Installation
@@ -8,6 +9,18 @@ Unofficial Python client for [Easy Equities](easyequities.io/) and [Satrix](satr
 ```
 pip install easy-equities-client
 ```
+
+## Features
+
+Accounts:
+- Get accounts for a user: `client.accounts.list()`
+- Get account holdings: `client.accounts.holdings(account.id)`
+- Get account valuations: `client.accounts.valuations(account.id)`
+- Get account transactions: `client.accounts.transactions(account.id)`
+
+Instruments:
+- Get the historical prices for an instrument: 
+  `client.instruments.historical_prices('EQU.ZA.SYGJP', Period.ONE_MONTH)`
 
 ## Usage
 
