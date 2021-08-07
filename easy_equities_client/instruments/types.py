@@ -1,5 +1,11 @@
 from enum import Enum
-from typing import List, TypedDict
+from typing import List
+import sys
+
+if sys.version_info >= (3, 8):
+    from typing import TypedDict  # pylint: disable=no-name-in-module
+else:
+    from typing_extensions import TypedDict
 
 
 class Period(Enum):
