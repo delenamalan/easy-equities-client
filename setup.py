@@ -7,7 +7,7 @@ setuptools.setup(
     name="easy-equities-client",  # Replace with your username
     version="0.2.3",
     author="delenamalan",
-    author_email="<delenamalan@somecompany.com>",
+    author_email="<delenamalan@somecoolcompany.com>",
     description="Easy Equity wrapper",
     long_description=long_description,
     long_description_content_type="text/markdown",

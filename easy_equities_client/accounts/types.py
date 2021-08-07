@@ -1,5 +1,11 @@
 from dataclasses import dataclass
-from typing import List, Optional, TypedDict
+# from typing import List, Optional, TypedDict
+import sys
+
+if sys.version_info >= (3, 8):
+    from typing import List, Optional, TypedDict  # pylint: disable=no-name-in-module
+else:
+    from typing_extensions import List, Optional, TypedDict
 
 
 @dataclass
