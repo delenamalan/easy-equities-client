@@ -1,4 +1,4 @@
-from dataclasses import dataclass
+from dataclasses import dataclass  # isort: skip
 from typing import List, Optional
 
 from bs4 import BeautifulSoup
