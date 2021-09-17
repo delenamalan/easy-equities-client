@@ -1,8 +1,8 @@
 from dataclasses import dataclass
+from typing import List, Optional
 
 from bs4 import BeautifulSoup
 from bs4.element import Tag
-from typing import List, Optional
 
 from easy_equities_client.accounts.types import Account, Holding
 

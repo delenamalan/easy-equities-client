@@ -1,6 +1,5 @@
-from dataclasses import dataclass
-
 import sys
+from dataclasses import dataclass
 from typing import List, Optional
 
 if sys.version_info >= (3, 8):
