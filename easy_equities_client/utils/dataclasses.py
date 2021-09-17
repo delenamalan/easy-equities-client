@@ -1,5 +1,6 @@
-from dataclasses import asdict
 from typing import Iterable, List, TypeVar
+
+from dataclasses import asdict
 
 _T = TypeVar("_T")
 
