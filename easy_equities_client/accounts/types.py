@@ -1,7 +1,7 @@
+from dataclasses import dataclass
+
 import sys
 from typing import List, Optional
-
-from dataclasses import dataclass
 
 if sys.version_info >= (3, 8):
     from typing import TypedDict
