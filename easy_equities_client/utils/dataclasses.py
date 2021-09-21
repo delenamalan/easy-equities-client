@@ -1,4 +1,4 @@
-from dataclasses import asdict  # isort: skip
+from dataclasses import asdict
 from typing import Iterable, List, TypeVar
 
 _T = TypeVar("_T")
