@@ -6,7 +6,21 @@ on:
   pull_request:
 
 jobs:
-  build:
+  linting:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Python 3.8
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.8
+    - name: Run pre-commit
+      uses: pre-commit/action@v2.0.0
+
+  test:
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
@@ -32,8 +46,6 @@ jobs:
     - name: Install Dependencies
       run: poetry install
       if: steps.cache.outputs.cache-hit != 'true'
-    - name: Run pre-commit
-      uses: pre-commit/action@v2.0.0
     - name: Test with pytest
       run: |
         poetry run pytest --cov
