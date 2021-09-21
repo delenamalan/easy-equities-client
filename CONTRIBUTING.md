@@ -3,7 +3,7 @@
 ## Installation
 
 System dependencies:
-- Python 3.8+
+- Python 3.6+
 - [Python Poetry](https://python-poetry.org/docs/)
 
 1. Create a virtual environment.

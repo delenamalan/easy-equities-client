@@ -6,7 +6,7 @@ on:
   pull_request:
 
 jobs:
-  build:
+  linting:
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
@@ -17,6 +17,22 @@ jobs:
       uses: actions/setup-python@v2
       with:
         python-version: 3.8
+    - name: Run pre-commit
+      uses: pre-commit/action@v2.0.0
+
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: [ '3.6', '3.7', '3.8']
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v2
+      with:
+        python-version: ${{ matrix.python-version }}
     - name: Install Poetry
       uses: snok/install-poetry@v1.1.1
     - name: Cache Poetry virtualenv
@@ -30,8 +46,6 @@ jobs:
     - name: Install Dependencies
       run: poetry install
       if: steps.cache.outputs.cache-hit != 'true'
-    - name: Run pre-commit
-      uses: pre-commit/action@v2.0.0
     - name: Test with pytest
       run: |
         poetry run pytest --cov

@@ -3,6 +3,8 @@
 Unofficial Python client for [Easy Equities](easyequities.io/) and 
 [Satrix](satrix.co.za/). **Intended for personal use.**
 
+Supports Python 3.6+.
+
 
 ## Installation
 
