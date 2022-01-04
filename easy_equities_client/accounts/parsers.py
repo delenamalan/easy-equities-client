@@ -1,9 +1,11 @@
+import re
 from dataclasses import dataclass
 from typing import Any, List, Optional
 
 from bs4 import BeautifulSoup
 from bs4.element import Tag
 
+from easy_equities_client import constants
 from easy_equities_client.accounts.types import Account, Holding
 
 
@@ -155,10 +157,25 @@ def get_transactions_from_page(page_body: bytes) -> List[Any]:
     transactions = []
     for row in rows:
         columns = row.find_all("td")
+        amount_pattern = re.compile(constants.RE_AMOUNT_PATTERN)
+        amount_match = amount_pattern.match(columns[2].text.strip())
+        if amount_match is None:
+            raise Exception(
+                f"Could not parse amount {columns[2].text.strip()} into currency and value."
+            )
         transactions.append(
             {
                 'date': columns[0].text.strip(),
                 'description': columns[1].text.strip(),
+                'currency': amount_match.group('currency'),
+                'value': float(
+                    (
+                        amount_match.group('symbol')
+                        if amount_match.group('symbol')
+                        else ''
+                    )
+                    + amount_match.group('value')
+                ),
                 'amount': columns[2].text.strip(),
             }
         )
