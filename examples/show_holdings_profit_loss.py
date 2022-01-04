@@ -62,5 +62,4 @@ for account in accounts:
             f"{symbol}{currency}{abs(profit_loss):.2f} ({profit_loss_perc:.2f}%)"
         )
         print(colour + str_profit_loss)
-        break
     print("")
