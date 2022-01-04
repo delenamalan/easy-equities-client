@@ -47,7 +47,11 @@ class AccountsClient(Client):
         response.raise_for_status()
         return json.loads(response.json())
 
+    # TODO: update method name to say only last year
     def transactions(self, account_id) -> List[Transaction]:
+        """
+        Gets the last year's transactions.
+        """
         self._switch_account(account_id)
         response = self.session.get(self._url(constants.PLATFORM_TRANSACTIONS_PATH))
         response.raise_for_status()
