@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "easy-equities-client"
-version = "0.3.0"
+version = "0.4.0"
 description = "Unofficial Easy Equities and Satrix Python Client"
 
 authors = ["Delena Malan <delena.malan@gmail.com>"]
