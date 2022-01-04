@@ -81,7 +81,6 @@ class AccountsClient(Client):
                 )
             )
             response = self.session.get(next_url)
-            print(page_number)
             new_transactions = get_transactions_from_page(response.content)
             if len(new_transactions) == 0:
                 # No more transactions left

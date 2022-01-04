@@ -27,5 +27,4 @@ PLATFORM_TRANSACTIONS_PATH = "/TransactionHistory/GetTransactions"
 PLATFORM_TRANSACTIONS_SEARCH_PATH_NEXT_PAGE = "/TransactionHistory/SearchWithPage?StartDate={start_date}&EndDate={end_date}&PageNumber={page_number}"
 PLATFORM_GET_CHART_DATA_PATH = "/Equity/GetChartDataByContractCode"
 
-
 RE_AMOUNT_PATTERN = r"(?P<symbol>\-)?(?P<currency>\w|\$)\s*(?P<value>(?:\d+|.)*)\s*"

@@ -174,7 +174,7 @@ def get_transactions_from_page(page_body: bytes) -> List[Any]:
                         if amount_match.group('symbol')
                         else ''
                     )
-                    + amount_match.group('value')
+                    + amount_match.group('value').replace(" ", "")
                 ),
                 'amount': columns[2].text.strip(),
             }
