@@ -1,6 +1,6 @@
 import json
 from datetime import date
-from typing import List
+from typing import Any, List
 
 from bs4 import BeautifulSoup
 
@@ -8,6 +8,7 @@ from easy_equities_client import constants
 from easy_equities_client.accounts.parsers import (
     AccountHoldingsParser,
     AccountOverviewParser,
+    get_transactions_from_page,
 )
 from easy_equities_client.accounts.types import Account, Holding, Transaction, Valuation
 from easy_equities_client.types import Client
@@ -58,33 +59,9 @@ class AccountsClient(Client):
         response.raise_for_status()
         return response.json()
 
-    def _transactions_from_page(self, page_body: bytes):
-        """
-        :param page_body: Page html from response.content.
-        """
-        soup = BeautifulSoup(page_body, "html.parser")
-        table = soup.find("div", {"id": "TransactionHistory"}).find("tbody")
-        if table is None:
-            validation_error = soup.find(class_='validation-summary-errors')
-            if validation_error:
-                raise Exception(validation_error.text.strip())
-            return []
-        rows = table.find_all("tr")
-        transactions = []
-        for row in rows:
-            columns = row.find_all("td")
-            transactions.append(
-                {
-                    'date': columns[0].text.strip(),
-                    'description': columns[1].text.strip(),
-                    'amount': columns[2].text.strip(),
-                }
-            )
-        return transactions
-
     def transactions_for_period(
         self, account_id: str, start_date: date, end_date: date
-    ):
+    ) -> List[Any]:
         """
         Gets transactions for a given period (max. 3 months).
 
@@ -94,7 +71,7 @@ class AccountsClient(Client):
         """
         self._switch_account(account_id)
         page_number = 1
-        transactions = []
+        transactions: List[Any] = []
         while True:
             next_url = self._url(
                 constants.PLATFORM_TRANSACTIONS_SEARCH_PATH_NEXT_PAGE.format(
@@ -104,8 +81,10 @@ class AccountsClient(Client):
                 )
             )
             response = self.session.get(next_url)
-            new_transactions = self._transactions_from_page(response.content)
+            print(page_number)
+            new_transactions = get_transactions_from_page(response.content)
             if len(new_transactions) == 0:
+                # No more transactions left
                 break
             transactions += new_transactions
             page_number += 1

@@ -21,6 +21,6 @@ accounts = client.accounts.list()
 account = accounts[0]
 
 transactions = client.accounts.transactions_for_period(
-    account.id, date(2021, 6, 2), date(2021, 9, 2)
+    account.id, date(2021, 8, 1), date(2021, 8, 31)
 )
 print(json.dumps(transactions, indent=4))

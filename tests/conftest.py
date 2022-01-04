@@ -73,3 +73,15 @@ def account_transactions():
 def historical_prices():
     with open('./tests/data/historical-prices.json', 'r') as f:
         return json.loads(f.read())
+
+
+@pytest.fixture
+def account_transactions_page1():
+    with open('./tests/data/transactions-history-page1.html', 'r') as f:
+        return f.read()
+
+
+@pytest.fixture
+def account_transactions_empty():
+    with open('./tests/data/transactions-history-empty.html', 'r') as f:
+        return f.read()

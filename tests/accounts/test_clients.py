@@ -1,4 +1,5 @@
 import json
+from datetime import date
 
 from easy_equities_client import constants
 from easy_equities_client.accounts.clients import AccountsClient
@@ -109,3 +110,78 @@ class TestAccountsClient:
         ]
 
         assert sorted(holdings, key=lambda x: x['name']) == expected_data
+
+    def test_account_transactions_for_period(
+        self,
+        base_platform_url,
+        requests_mock,
+        mocker,
+        account_transactions_page1,
+        account_transactions_empty,
+    ):
+        mocker.patch(
+            'easy_equities_client.accounts.clients.AccountsClient._switch_account'
+        )
+        start_date = date(2021, 8, 1)
+        end_date = date(2021, 8, 31)
+        page1_url = (
+            base_platform_url
+            + constants.PLATFORM_TRANSACTIONS_SEARCH_PATH_NEXT_PAGE.format(
+                start_date=f"{start_date.month}/{start_date.day}/{start_date.year}",
+                end_date=f"{end_date.month}/{end_date.day}/{end_date.year}",
+                page_number=1,
+            )
+        )
+        page2_url = (
+            base_platform_url
+            + constants.PLATFORM_TRANSACTIONS_SEARCH_PATH_NEXT_PAGE.format(
+                start_date=f"{start_date.month}/{start_date.day}/{start_date.year}",
+                end_date=f"{end_date.month}/{end_date.day}/{end_date.year}",
+                page_number=2,
+            )
+        )
+        requests_mock.get(
+            page1_url,
+            status_code=200,
+            content=str.encode(account_transactions_page1),
+        )
+        requests_mock.get(
+            page2_url, status_code=200, content=str.encode(account_transactions_empty)
+        )
+        expected_output = [
+            {
+                "date": "2021-08-31",
+                "description": "Account Balance Carried Forward",
+                "amount": "R63.55",
+            },
+            {
+                "date": "2021-08-16",
+                "description": "Schroder European Real Estate Inv Trust PLC-Foreign Dividends @31.49625",
+                "amount": "R52.21",
+            },
+            {
+                "date": "2021-08-16",
+                "description": "Dividend Withholding Tax SCD-Dividend Withholding Tax @20%",
+                "amount": "-R10.44",
+            },
+            {"date": "2021-08-01", "description": "Interest", "amount": "R0.03"},
+            {
+                "date": "2021-08-01",
+                "description": "Cash Management Fee",
+                "amount": "-R0.01",
+            },
+            {
+                "date": "2021-08-01",
+                "description": "VAT on Cash Management Fee",
+                "amount": "R0.00",
+            },
+            {
+                "date": "2021-08-01",
+                "description": "Account Balance Brought Forward",
+                "amount": "R21.77",
+            },
+        ]
+        client = AccountsClient(base_platform_url)
+        assert (
+            client.transactions_for_period('1', start_date, end_date) == expected_output
+        )

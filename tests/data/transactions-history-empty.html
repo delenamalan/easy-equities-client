@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>Transaction History</title>
+</head>
+
+<body>
+    <div class="container container-margin container-min-height">
+        <div class="control-margin-bottom">
+            <h1 class="page-header">
+                Transaction History
+            </h1>
+            <div class="font24 bold">
+                View all your transactions within your chosen time period. The most recent transactions will be at the
+                top of the list.
+            </div>
+            <div class="control-margin-top-large">
+                <div id="TransactionHistory">
+                    <div class="form-group control-margin-top row">
+                        <form method="post" id="TransactionHistoryReportWebForm" action="/TransactionHistory/Search">
+                        </form>
+                    </div>
+                    <div class="clearboth"></div>
+                    <div id="PrintArea">
+                        <div class="padding-left-right-15">
+                            <div class="wide-container padding-bottom-20">
+                                <h1 class="page-header">Recent Transaction History</h1>
+                                <div class="no-more-tables">
+                                    <table class="table table-style">
+                                        <thead>
+                                            <tr>
+                                                <th class="nowrap">Date</th>
+                                                <th class="text-left">Comment</th>
+                                                <th>Debit/Credit</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
