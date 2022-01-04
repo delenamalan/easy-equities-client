@@ -24,6 +24,7 @@ class Holding(TypedDict, total=False):
     img: str
     view_url: str
     isin: str
+    shares: str
 
 
 class Transaction(TypedDict):

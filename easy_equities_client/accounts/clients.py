@@ -1,6 +1,8 @@
 import json
 from typing import List
 
+from bs4 import BeautifulSoup
+
 from easy_equities_client import constants
 from easy_equities_client.accounts.parsers import (
     AccountHoldingsParser,
@@ -51,9 +53,21 @@ class AccountsClient(Client):
         response.raise_for_status()
         return response.json()
 
-    def holdings(self, account_id) -> List[Holding]:
+    def holdings(self, account_id: str, include_shares: bool = False) -> List[Holding]:
         self._switch_account(account_id)
         response = self.session.get(self._url(constants.PLATFORM_HOLDINGS_PATH))
         response.raise_for_status()
         parser = AccountHoldingsParser(response.content)
-        return parser.extract_holdings()
+        holdings = parser.extract_holdings()
+        if include_shares:
+            for holding in holdings:
+                response = self.session.get(self._url(holding['view_url']))
+                soup = BeautifulSoup(response.content, "html.parser")
+                whole_shares = soup.find(
+                    lambda tag: '#Shares' in tag
+                ).next_sibling.next_sibling.text.strip()
+                partial_shares = soup.find(
+                    lambda tag: '#FSR' in tag
+                ).next_sibling.next_sibling.text.strip()
+                holding['shares'] = f"{whole_shares}{partial_shares}"
+        return holdings

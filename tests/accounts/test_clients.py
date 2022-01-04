@@ -51,17 +51,38 @@ class TestAccountsClient:
         assert client.transactions('1') == account_transactions
 
     def test_account_holdings(
-        self, base_platform_url, requests_mock, mocker, account_holdings_page
+        self,
+        base_platform_url,
+        requests_mock,
+        mocker,
+        account_holdings_page,
+        holding_details_page,
     ):
         mocker.patch(
             'easy_equities_client.accounts.clients.AccountsClient._switch_account'
         )
-        url = base_platform_url + constants.PLATFORM_HOLDINGS_PATH
+        # Mock holdings
         requests_mock.get(
-            url, status_code=200, content=str.encode(account_holdings_page)
+            base_platform_url + constants.PLATFORM_HOLDINGS_PATH,
+            status_code=200,
+            content=str.encode(account_holdings_page),
         )
+        # Mock holding stocks
+        requests_mock.get(
+            base_platform_url
+            + "/AccountOverview/GetInstrumentDetailAction/?IsinCode=ZAE000249512",
+            status_code=200,
+            content=str.encode(holding_details_page),
+        )
+        requests_mock.get(
+            base_platform_url
+            + "/AccountOverview/GetInstrumentDetailAction/?IsinCode=ZAE000249538",
+            status_code=200,
+            content=str.encode(holding_details_page),
+        )
+
         client = AccountsClient(base_platform_url)
-        holdings = client.holdings('1')
+        holdings = client.holdings('1', include_shares=True)
         expected_data = [
             {
                 "name": "SYGNIA ITRIX EUROSTOXX50",
@@ -72,6 +93,7 @@ class TestAccountsClient:
                 "view_url": "/AccountOverview/GetInstrumentDetailAction/?IsinCode=ZAE000249512",
                 "isin": "ZAE000249512",
                 "contract_code": "TFSA.SYGEU",
+                "shares": "200.0123",
             },
             {
                 "name": "SYGNIA ITRIX MSCI JAPAN",
@@ -82,6 +104,7 @@ class TestAccountsClient:
                 "view_url": "/AccountOverview/GetInstrumentDetailAction/?IsinCode=ZAE000249538",
                 "isin": "ZAE000249538",
                 "contract_code": "TFSA.SYGJP",
+                "shares": "200.0123",
             },
         ]
 
