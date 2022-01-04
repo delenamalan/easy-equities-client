@@ -46,9 +46,9 @@ def convert_to_float(value: str) -> float:
 for account in accounts:
     print(f"# {account.name}\n")
     # Go through each holding
-    holdings = client.accounts.holdings(account.id)
+    holdings = client.accounts.holdings(account.id, include_shares=True)
     for holding in holdings:
-        print(f"- {holding['name']}: ", end='')
+        print(f"- {holding['name']} ({holding['shares']}): ", end='')
         currency = holding['purchase_value'][0]
         purchase_value = convert_to_float(holding['purchase_value'])
         profit_loss = convert_to_float(holding['current_value']) - convert_to_float(
@@ -62,4 +62,5 @@ for account in accounts:
             f"{symbol}{currency}{abs(profit_loss):.2f} ({profit_loss_perc:.2f}%)"
         )
         print(colour + str_profit_loss)
+        break
     print("")

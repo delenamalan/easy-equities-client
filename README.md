@@ -59,6 +59,24 @@ holdings = client.accounts.holdings(accounts[0].id)
     ...
 ]
 """
+# Optionally include number of shares for each holding (creates another API call for each holding)
+holdings = client.accounts.holdings(accounts[0].id, include_shares=True)
+"""
+[
+    {
+        "name": "CoreShares Global DivTrax ETF",
+        "contract_code": "EQU.ZA.GLODIV",
+        "purchase_value": "R2 000.00",
+        "current_value": "R3 000.00",
+        "current_price": "R15.50",
+        "img": "https://resources.easyequities.co.za/logos/EQU.ZA.GLODIV.png",
+        "view_url": "/AccountOverview/GetInstrumentDetailAction/?IsinCode=ZAE000254249",
+        "isin": "ZAE000254249",
+        "shares": "200.123"
+    },
+    ...
+]
+"""
 
 # Get account valuations
 valuations = client.accounts.valuations(accounts[0].id)

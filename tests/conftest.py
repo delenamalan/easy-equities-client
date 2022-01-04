@@ -52,6 +52,12 @@ def account_holdings_page():
 
 
 @pytest.fixture
+def holding_details_page():
+    with open('./tests/data/holding-details.html', 'r') as f:
+        return f.read()
+
+
+@pytest.fixture
 def valuations():
     with open('./tests/data/account-valuations.json', 'r') as f:
         return f.read()
