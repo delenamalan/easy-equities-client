@@ -1,4 +1,5 @@
 import json
+from datetime import date
 from typing import List
 
 from bs4 import BeautifulSoup
@@ -56,6 +57,67 @@ class AccountsClient(Client):
         response = self.session.get(self._url(constants.PLATFORM_TRANSACTIONS_PATH))
         response.raise_for_status()
         return response.json()
+
+    def _transactions_from_page(self, page_body: bytes):
+        """
+        :param page_body: Page html from response.content.
+        """
+        soup = BeautifulSoup(page_body, "html.parser")
+        table = soup.find("div", {"id": "TransactionHistory"}).find("tbody")
+        if table is None:
+            validation_error = soup.find(class_='validation-summary-errors')
+            if validation_error:
+                raise Exception(validation_error.text.strip())
+            return []
+        rows = table.find_all("tr")
+        transactions = []
+        for row in rows:
+            columns = row.find_all("td")
+            transactions.append(
+                {
+                    'date': columns[0].text.strip(),
+                    'description': columns[1].text.strip(),
+                    'amount': columns[2].text.strip(),
+                }
+            )
+        return transactions
+
+    def transactions_for_period(
+        self, account_id: str, start_date: date, end_date: date
+    ):
+        """
+        Gets transactions for a given period (max. 3 months).
+
+        :param account_id:
+        :param start_date:
+        :param end_date:
+        """
+        self._switch_account(account_id)
+        response = self.session.post(
+            self._url(constants.PLATFORM_TRANSACTIONS_SEARCH_PATH),
+            data={
+                'StartDate': start_date.strftime('%Y/%m/%d'),
+                'EndDate': end_date.strftime('%Y/%m/%d'),
+            },
+        )
+        response.raise_for_status()
+        transactions = self._transactions_from_page(response.content)
+        page_number = 2
+        while True:
+            next_url = self._url(
+                constants.PLATFORM_TRANSACTIONS_SEARCH_PATH_NEXT_PAGE.format(
+                    start_date=f"{start_date.month}/{start_date.day}/{start_date.year}",
+                    end_date=f"{end_date.month}/{end_date.day}/{end_date.year}",
+                    page_number=page_number,
+                )
+            )
+            response = self.session.get(next_url)
+            new_transactions = self._transactions_from_page(response.content)
+            if len(new_transactions) == 0:
+                break
+            transactions += new_transactions
+            page_number += 1
+        return transactions
 
     def holdings(self, account_id: str, include_shares: bool = False) -> List[Holding]:
         self._switch_account(account_id)
