@@ -93,16 +93,8 @@ class AccountsClient(Client):
         :param end_date:
         """
         self._switch_account(account_id)
-        response = self.session.post(
-            self._url(constants.PLATFORM_TRANSACTIONS_SEARCH_PATH),
-            data={
-                'StartDate': start_date.strftime('%Y/%m/%d'),
-                'EndDate': end_date.strftime('%Y/%m/%d'),
-            },
-        )
-        response.raise_for_status()
-        transactions = self._transactions_from_page(response.content)
-        page_number = 2
+        page_number = 1
+        transactions = []
         while True:
             next_url = self._url(
                 constants.PLATFORM_TRANSACTIONS_SEARCH_PATH_NEXT_PAGE.format(
