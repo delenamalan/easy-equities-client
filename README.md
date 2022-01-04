@@ -5,6 +5,8 @@ Unofficial Python client for [Easy Equities](easyequities.io/) and
 
 Supports Python 3.6+.
 
+[Pypi](https://pypi.org/project/easy-equities-client/)
+
 
 ## Installation
 
