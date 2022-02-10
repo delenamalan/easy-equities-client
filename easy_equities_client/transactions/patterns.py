@@ -1,0 +1,6 @@
+alpha_num = r"[a-zA-Z0-9_&()]"
+stock = rf"(?P<stock>(?:{alpha_num}+\s*?)*?)"
+short_stock = r"(?P<stock>(?:\w+\s*?)*?)"
+amount = r"(?P<amount>-?(?:\d|\.)+)"
+value = r"(?P<value>-?(?:\d|\,|\.)+)"
+amount_at_value = rf"{amount}\s+\@\s+{value}"

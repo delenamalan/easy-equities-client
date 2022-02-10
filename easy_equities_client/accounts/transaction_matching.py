@@ -28,10 +28,6 @@ TRANSACTION_PATTERN_SECURITIES_INTEREST = rf"{stock}-Securities Interest\s+@{amo
 TRANSACTION_PATTERN_REIT_DISTRIBUTION = rf"{stock}-REIT Distribution\s+@{amount}"  # e.g. "Satrix 40 ETF-REIT Distribution @2.64919"
 
 
-def eq(pattern, value):
-    return pattern == value
-
-
 def match_balance_carried_forward(value):
     return (
         value == "Account Balance Carried Forward"
