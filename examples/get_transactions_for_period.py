@@ -30,7 +30,7 @@ for account in accounts:
         )
         start_date = end_date + timedelta(days=1)
     break
-# print(json.dumps(transactions, indent=4))
+print(json.dumps(transactions, indent=4))
 
 with open("transactions_examples.json", 'w') as f:
     f.write(json.dumps(transactions, indent=4))

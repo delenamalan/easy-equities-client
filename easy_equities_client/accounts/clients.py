@@ -1,4 +1,5 @@
 import json
+import logging
 from datetime import date
 from typing import Any, List
 
@@ -12,6 +13,8 @@ from easy_equities_client.accounts.parsers import (
 )
 from easy_equities_client.accounts.types import Account, Holding, Transaction, Valuation
 from easy_equities_client.types import Client
+
+logger = logging.getLogger(__name__)
 
 
 class AccountsClient(Client):
@@ -49,8 +52,13 @@ class AccountsClient(Client):
         response.raise_for_status()
         return json.loads(response.json())
 
-    # TODO: update method name to say only last year
-    def transactions(self, account_id) -> List[Transaction]:
+    def transactions(self, account_id: str) -> List[Transaction]:
+        logger.warning(
+            "AccountsClient.transactions is deprecated. Use AccountsClient.transactions_last_year or AccountsClient.transactions_for_period instead"
+        )
+        return self.transactions_last_year(account_id)
+
+    def transactions_last_year(self, account_id: str) -> List[Transaction]:
         """
         Gets the last year's transactions.
         """
@@ -69,6 +77,9 @@ class AccountsClient(Client):
         :param start_date:
         :param end_date:
         """
+        # TODO: check if more than 93 days
+        # TODO: loop through to get by max 93-day periods
+
         self._switch_account(account_id)
         page_number = 1
         transactions: List[Any] = []
