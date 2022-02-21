@@ -54,6 +54,13 @@ class AccountsClient(Client):
         return response.json()
 
     def holdings(self, account_id: str, include_shares: bool = False) -> List[Holding]:
+        """
+        Get an account's holdings/stocks.
+
+        :param account_id: String account ID.
+        :param include_shares: Whether to fetch the number of shares per holding. Create an extra
+        HTTP request per holding.
+        """
         self._switch_account(account_id)
         response = self.session.get(self._url(constants.PLATFORM_HOLDINGS_PATH))
         response.raise_for_status()
