@@ -1,9 +1,10 @@
 import json
 import logging
 from datetime import date
-from typing import Any, List
+from typing import Any, List, Optional
 
 from bs4 import BeautifulSoup
+from requests import Session
 
 from easy_equities_client import constants
 from easy_equities_client.accounts.parsers import (
@@ -18,6 +19,10 @@ logger = logging.getLogger(__name__)
 
 
 class AccountsClient(Client):
+    def __init__(self, base_url: str = "", session: Session = None):
+        super().__init__(base_url, session)
+        self.current_account: Optional[str] = None
+
     def _get_account_overview_page(self) -> str:
         response = self.session.get(self._url(constants.PLATFORM_ACCOUNT_OVERVIEW_PATH))
         assert (
@@ -33,16 +38,18 @@ class AccountsClient(Client):
 
     def _switch_account(self, account_id: str) -> None:
         """
-        Switch the currently selected account.
+        Switch the currently selected account to account with ID account_id.
         """
-        data = {'trustAccountId': account_id}
-        response = self.session.post(
-            self._url(constants.PLATFORM_UPDATE_CURRENCY_PATH), data
-        )
-        response.raise_for_status()
-        assert (
-            response.status_code == 200
-        ), "Update currency request should return 200 status code"
+        if self.current_account != account_id:
+            data = {'trustAccountId': account_id}
+            response = self.session.post(
+                self._url(constants.PLATFORM_UPDATE_CURRENCY_PATH), data
+            )
+            response.raise_for_status()
+            assert (
+                response.status_code == 200
+            ), "Update currency request should return 200 status code"
+            self.current_account = account_id
 
     def valuations(self, account_id: str) -> Valuation:
         self._switch_account(account_id)
@@ -101,6 +108,13 @@ class AccountsClient(Client):
         return transactions
 
     def holdings(self, account_id: str, include_shares: bool = False) -> List[Holding]:
+        """
+        Get an account's holdings/stocks.
+
+        :param account_id: String account ID.
+        :param include_shares: Whether to fetch the number of shares per holding. Create an extra
+        HTTP request per holding.
+        """
         self._switch_account(account_id)
         response = self.session.get(self._url(constants.PLATFORM_HOLDINGS_PATH))
         response.raise_for_status()
