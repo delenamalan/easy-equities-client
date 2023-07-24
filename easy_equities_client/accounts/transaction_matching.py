@@ -6,7 +6,7 @@ short_stock = r"(?P<stock>(?:\w+\s*?)*?)"
 amount = r"(?P<amount>-?(?:\d|\.)+)"
 value = r"(?P<value>-?(?:\d|\,|\.)+)"
 amount_at_value = rf"{amount}\s+\@\s+{value}"
-TRANSACTION_PATTERN_DIVIDENDS = rf"{stock}\s*-(?:Foreign\s+)?\s*Dividends\s+\@{amount}"  # e.g. "Schroder European Real Estate Inv Trust PLC-Foreign Dividends @31.49625"
+TRANSACTION_PATTERN_DIVIDENDS = rf"(?:Dividend\s+)?{stock}\s*-(?:Foreign\s+)?\s*Dividends\s+\@\s*{amount}c?"  # e.g. "Schroder European Real Estate Inv Trust PLC-Foreign Dividends @31.49625"
 
 TRANSACTION_PATTERN_DIVIDEND_TAX = rf"(?:Foreign\s+)?Dividend Withholding Tax\s+{short_stock}-(?:Foreign\s+)?Dividend Withholding Tax\s+(?:on Dividends\s+)?\@(?P<perc>{amount})\%"  # e.g. "Dividend Withholding Tax SCD-Dividend Withholding Tax @20%"
 TRANSACTION_PATTERN_BOUGHT = rf"Bought\s+{stock}\s+{amount_at_value}"  # example "Bought Check Point Software Tech 0.3132 @ 12,692.00"
