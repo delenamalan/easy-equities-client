@@ -1,5 +1,8 @@
 # Easy Equities and Satrix Python Client
 
+> [!WARNING]  
+> Not actively maintained anymore.
+
 Unofficial Python client for [Easy Equities](easyequities.io/) and 
 [Satrix](satrix.co.za/). **Intended for personal use.**
 
